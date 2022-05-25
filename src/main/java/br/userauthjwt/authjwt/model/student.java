@@ -22,7 +22,7 @@ public class student implements UserDetails {
     private Integer id;
     @Column(nullable = false, length = 50, unique = true)
     private String email;
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
 
     @Override

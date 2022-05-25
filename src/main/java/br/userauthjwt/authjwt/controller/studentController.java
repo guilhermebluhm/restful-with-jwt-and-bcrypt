@@ -1,5 +1,6 @@
 package br.userauthjwt.authjwt.controller;
 
+import br.userauthjwt.authjwt.model.dto.studentDto;
 import br.userauthjwt.authjwt.model.student;
 import br.userauthjwt.authjwt.service.impl.studentImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class studentController {
 
     @GetMapping("listar")
     @ResponseStatus(HttpStatus.OK)
-    public List<student> getAll(){
+    public List<studentDto> getAll(){
         return this.impl.getAll();
     }
 
     @GetMapping("listar/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public student getStudent(@PathVariable("id") int id){
+    public studentDto getStudent(@PathVariable("id") int id){
         return this.impl.findStudent(id);
     }
 
@@ -33,4 +34,10 @@ public class studentController {
         return this.impl.saveNewStudent(std);
     }
 
+    @GetMapping("validar-senha")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean verifyPassword(@RequestParam(required = false) int id,
+                                  @RequestParam(required = false) String passwd){
+        return this.impl.validateEncryptRawPassword(id,passwd);
+    }
 }
